@@ -22,6 +22,7 @@ router.post(
     return userControllers.createPatient(req, res, next);
   }
 );
+
 router.post(
   "/create-doctor",
   auth(UserRole.ADMIN),
@@ -31,6 +32,7 @@ router.post(
     return userControllers.createDoctor(req, res, next);
   }
 );
+
 router.post(
   "/create-admin",
   auth(UserRole.ADMIN),

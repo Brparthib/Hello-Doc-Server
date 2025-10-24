@@ -2,7 +2,7 @@ import { Request } from "express";
 import { prisma } from "../../shared/prisma";
 import bcrypt from "bcryptjs";
 import { fileUploader } from "../../helper/fileUploader";
-import { paginationHelper } from "../../helper/paginationHelper";
+import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { Prisma, UserRole } from "@prisma/client";
 import { userSearchableFields } from "./user.constant";
 
@@ -89,7 +89,7 @@ const createAdmin = async (req: Request) => {
   return result;
 };
 
-const getAllUsers = async (filters: any, options: any) => {
+const getAllUsers = async (filters: any, options: IOptions) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 

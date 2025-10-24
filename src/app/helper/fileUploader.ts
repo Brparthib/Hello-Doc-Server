@@ -18,9 +18,9 @@ const upload = multer({ storage: storage });
 const uploadToCloudinary = async (file: Express.Multer.File) => {
   // Configuration
   cloudinary.config({
-    cloud_name: config.cloud_name,
-    api_key: config.api_key,
-    api_secret: config.api_secret,
+    cloud_name: config.cloudinary.cloud_name,
+    api_key: config.cloudinary.api_key,
+    api_secret: config.cloudinary.api_secret,
   });
 
   // Upload an image
