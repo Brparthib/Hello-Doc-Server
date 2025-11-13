@@ -1,5 +1,6 @@
-import multer from "multer";
+import fs from "fs";
 import path from "path";
+import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import config from "../../config";
 
@@ -23,16 +24,26 @@ const uploadToCloudinary = async (file: Express.Multer.File) => {
     api_secret: config.cloudinary.api_secret,
   });
 
-  // Upload an image
-  const uploadResult = await cloudinary.uploader
-    .upload(file.path, {
+  try {
+    // Upload file to cloudinary
+    const uploadResult = await cloudinary.uploader.upload(file.path, {
       public_id: file.filename,
-    })
-    .catch((error) => {
-      console.log(error);
     });
 
-  return uploadResult;
+    // Delete file from local upload folder
+    fs.unlink(file.path, (err) => {
+      if (err) {
+        console.error("Failed to delete local file: ", err);
+      } else {
+        console.log("Local file delete: ", file.path);
+      }
+    });
+
+    return uploadResult;
+  } catch (error) {
+    console.log("Cloudinary Upload Failed: ", error);
+    throw error;
+  }
 };
 
 export const fileUploader = {

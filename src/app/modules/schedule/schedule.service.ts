@@ -1,8 +1,10 @@
+import httpStatus from "http-status";
 import { addMinutes, addHours, format } from "date-fns";
 import { prisma } from "../../shared/prisma";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { Prisma } from "@prisma/client";
 import { IJWTPayload } from "../../types";
+import ApiError from "../../errors/ApiError";
 
 const insertIntoDB = async (payload: any) => {
   const { startDate, endDate, startTime, endTime } = payload;
@@ -48,7 +50,10 @@ const insertIntoDB = async (payload: any) => {
       });
 
       if (existingSchedule) {
-        throw new Error("Already exists these schedule!");
+        throw new ApiError(
+          httpStatus.BAD_REQUEST,
+          "Already exists these schedule!"
+        );
       }
 
       const result = await prisma.schedule.create({
