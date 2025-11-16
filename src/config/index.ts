@@ -17,4 +17,6 @@ export default {
   jwt_access_expires: process.env.JWT_ACCESS_EXPIRES,
   jwt_refresh_secret: process.env.JWT_REFRESH_SECRET,
   jwt_refresh_expires: process.env.JWT_REFRESH_EXPIRES,
+
+  openRouterApiKey: process.env.OPEN_ROUTER_API_KEY,
 };
