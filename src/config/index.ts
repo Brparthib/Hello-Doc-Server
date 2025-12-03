@@ -19,4 +19,8 @@ export default {
   jwt_refresh_expires: process.env.JWT_REFRESH_EXPIRES,
 
   openRouterApiKey: process.env.OPEN_ROUTER_API_KEY,
+
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  CLIENT_URL: process.env.CLIENT_URL,
+  web_hook_secret: process.env.WEB_HOOK_SECRET
 };
